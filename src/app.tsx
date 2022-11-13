@@ -86,7 +86,7 @@ export function App() {
                                                     >
                                                         <td
                                                             class={clsx(
-                                                                "px-4 py-3 transition-colors",
+                                                                "px-4 py-3",
                                                                 visited &&
                                                                     "line-through text-gray-400"
                                                             )}
@@ -95,7 +95,7 @@ export function App() {
                                                         </td>
                                                         <td
                                                             class={clsx(
-                                                                "px-4 py-3 text-right transition-colors",
+                                                                "px-4 py-3 text-right",
                                                                 visited &&
                                                                     "text-gray-400"
                                                             )}
