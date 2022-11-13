@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
 import { Shelfmark } from "./shelfmark";
-import { groupBy } from "lodash";
+import { groupBy } from "lodash-es";
 import { Fragment } from "preact/jsx-runtime";
 import { ArrowUpRight } from "lucide-preact";
 import clsx from "clsx";
