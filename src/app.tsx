@@ -3,22 +3,62 @@ import { Shelfmark } from "./shelfmark";
 import { groupBy } from "lodash";
 import { Fragment } from "preact/jsx-runtime";
 import { ArrowUpRight } from "lucide-preact";
+import clsx from "clsx";
+
+type Destination = {
+    shelfmark: Shelfmark;
+    visited: boolean;
+};
+
+function useDestinations() {
+    const [destinations, setDestinations] = useState<Destination[]>([]);
+
+    function getDestination(shelfmark: Shelfmark): Destination | null {
+        return (
+            destinations.find(
+                (destination) => destination.shelfmark.compare(shelfmark) == 0
+            ) ?? null
+        );
+    }
+
+    function addShelfmark(shelfmark: Shelfmark) {
+        if (getDestination(shelfmark) != null) return;
+        setDestinations((destinations) => [
+            ...destinations,
+            { shelfmark, visited: false },
+        ]);
+    }
+
+    function setVisited(shelfmark: Shelfmark, visited: boolean) {
+        setDestinations((destinations) =>
+            destinations.map((destination) => {
+                if (destination.shelfmark.compare(shelfmark) == 0) {
+                    return { ...destination, visited };
+                } else {
+                    return destination;
+                }
+            })
+        );
+    }
+
+    const sortedDestinations = groupBy(
+        [...destinations].sort((a, b) => a.shelfmark.compare(b.shelfmark)),
+        (dest) => dest.shelfmark.floorText
+    );
+
+    return { destinations: sortedDestinations, addShelfmark, setVisited };
+}
 
 export function App() {
     const [input, setInput] = useState("");
-    const [destinations, setDestinations] = useState<Shelfmark[]>([]);
-
-    const orderedDestinations = groupBy(
-        [...destinations].sort((a, b) => a.compare(b)),
-        (dest) => dest.floorText
-    );
+    const { destinations, addShelfmark, setVisited } = useDestinations();
 
     return (
         <div class="bg-white h-full flex flex-col font-mono">
             <div class="flex-1 overflow-y-auto">
                 <table class="w-full">
                     <tbody class="divide-y">
-                        {Object.entries(orderedDestinations)
+                        {Object.entries(destinations)
                             .filter(
                                 ([_, destinations]) => destinations.length > 0
                             )
@@ -31,18 +71,42 @@ export function App() {
                                                 <span>{floorText}</span>
                                             </td>
                                         </tr>
-                                        {destinations.map((dest) => {
-                                            return (
-                                                <tr key={dest.text}>
-                                                    <td class="px-4 py-3">
-                                                        {dest.text}
-                                                    </td>
-                                                    <td class="px-4 py-3 text-right">
-                                                        {dest.stack ?? "??"}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
+                                        {destinations.map(
+                                            ({ shelfmark, visited }) => {
+                                                return (
+                                                    <tr
+                                                        key={shelfmark.text}
+                                                        class="cursor-pointer"
+                                                        onClick={() => {
+                                                            setVisited(
+                                                                shelfmark,
+                                                                !visited
+                                                            );
+                                                        }}
+                                                    >
+                                                        <td
+                                                            class={clsx(
+                                                                "px-4 py-3 transition-colors",
+                                                                visited &&
+                                                                    "line-through text-gray-400"
+                                                            )}
+                                                        >
+                                                            {shelfmark.text}
+                                                        </td>
+                                                        <td
+                                                            class={clsx(
+                                                                "px-4 py-3 text-right transition-colors",
+                                                                visited &&
+                                                                    "text-gray-400"
+                                                            )}
+                                                        >
+                                                            {shelfmark.stack ??
+                                                                "??"}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            }
+                                        )}
                                     </Fragment>
                                 );
                             })}
@@ -54,7 +118,7 @@ export function App() {
                 onSubmit={(e) => {
                     e.preventDefault();
                     const shelfmark = new Shelfmark(input);
-                    setDestinations((dests) => [...dests, shelfmark]);
+                    addShelfmark(shelfmark);
                     setInput("");
                 }}
             >

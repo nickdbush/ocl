@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "lodash": "^4.17.21",
     "lucide-preact": "^0.100.0",
     "preact": "^10.11.2"
