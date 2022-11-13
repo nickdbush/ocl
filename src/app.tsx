@@ -127,7 +127,7 @@ export function App() {
                     type="text"
                     placeholder="Shelfmark"
                     value={input}
-                    onChange={(e) => setInput(e.currentTarget.value)}
+                    onInput={(e) => setInput(e.currentTarget.value)}
                     autocomplete="off"
                     autocorrect="off"
                     autocapitalize="off"
