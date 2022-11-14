@@ -90,4 +90,28 @@ export const stacks: Stack[] = [
         id: "2F",
         segments: [{ bays: [130, 134], marks: ["KD1289 Cop.", "KD1634 Bat."] }],
     },
+    {
+        id: "3A",
+        segments: [{ bays: [135, 139], marks: ["KD1634 Hep.", "KD1864 Hou."] }],
+    },
+    {
+        id: "3B",
+        segments: [{ bays: [140, 144], marks: ["KD1864 Hou.", "KD2051 Lin."] }],
+    },
+    {
+        id: "3C",
+        segments: [{ bays: [145, 149], marks: ["KD2051 Mil.", "KD2535 Mic."] }],
+    },
+    {
+        id: "3D",
+        segments: [{ bays: [150, 154], marks: ["KD2535 Pro.", "KD3372 Env."] }],
+    },
+    {
+        id: "3E",
+        segments: [{ bays: [155, 159], marks: ["KD3372 Env.", "KD4103 Gen."] }],
+    },
+    {
+        id: "3F",
+        segments: [{ bays: [160, 164], marks: ["KD4103 Jef.", "KD7117 Jac."] }],
+    },
 ];
