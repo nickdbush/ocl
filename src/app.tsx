@@ -56,6 +56,8 @@ type StopProps = {
 
 export function Stop({ destination, setVisited }: StopProps) {
     const { shelfmark, visited } = destination;
+    const location = shelfmark.location;
+
     return (
         <tr
             class="cursor-pointer"
@@ -65,16 +67,24 @@ export function Stop({ destination, setVisited }: StopProps) {
         >
             <td
                 class={clsx(
-                    "px-4 py-3",
+                    "pl-4 py-3",
                     visited && "line-through text-gray-400"
                 )}
             >
                 {shelfmark.text}
             </td>
             <td
-                class={clsx("px-4 py-3 text-right", visited && "text-gray-400")}
+                class={clsx("pr-4 py-3 text-right", visited && "text-gray-400")}
             >
-                {shelfmark.stack ?? "??"}
+                <span class="mr-5">
+                    {location != null && (
+                        <>
+                            {location.segment.bays[0]} -&gt;{" "}
+                            {location.segment.bays[1]}
+                        </>
+                    )}
+                </span>
+                <span class="font-bold">{location?.stack.id ?? "??"}</span>
             </td>
         </tr>
     );

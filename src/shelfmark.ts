@@ -1,5 +1,10 @@
 import { stacks as stackConfig } from "./config";
 
+export type Location = {
+    segment: Segment;
+    stack: Stack;
+};
+
 export class Shelfmark {
     #main: string;
     #suffix: string;
@@ -62,8 +67,8 @@ export class Shelfmark {
         return [this.#main, this.#suffix].join(" ");
     }
 
-    get stack(): string | null {
-        return findStackForShelfmark(this)?.id ?? null;
+    get location(): Location | null {
+        return findStackForShelfmark(this);
     }
 
     compare(other: Shelfmark): number {
@@ -131,7 +136,7 @@ export const stacks: Stack[] = stackConfig.map((stack) => {
     };
 });
 
-function findStackForShelfmark(shelfmark: Shelfmark): Stack | null {
+function findStackForShelfmark(shelfmark: Shelfmark): Location | null {
     for (const stack of stacks) {
         for (const segment of stack.segments) {
             const [start, end] = segment.marks;
@@ -141,7 +146,7 @@ function findStackForShelfmark(shelfmark: Shelfmark): Stack | null {
                 // Shelfmark LT end
                 shelfmark.compare(end) == -1
             ) {
-                return stack;
+                return { stack, segment };
             }
         }
     }
