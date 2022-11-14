@@ -69,7 +69,7 @@ export function App() {
         }}
       >
         <input
-          class="w-full px-4 py-4 border-t bg-white outline-none focus:border-blue-500 focus:bg-blue-50 transition-colors placeholder:text-gray-700"
+          class="w-full px-6 py-4 border-t bg-white outline-none focus:border-blue-500 focus:bg-blue-50 transition-colors placeholder:text-gray-700"
           type="text"
           placeholder="Shelfmark"
           value={input}
@@ -101,8 +101,8 @@ export function Stop({ destination, setVisited }: StopProps) {
         setVisited(!visited);
       }}
     >
-      <td class={clsx("pl-4 py-3", visited && "line-through text-gray-400")}>{shelfmark.text}</td>
-      <td class={clsx("pr-4 py-3 text-right", visited && "text-gray-400")}>
+      <td class={clsx("pl-6 py-4", visited && "line-through text-gray-400")}>{shelfmark.text}</td>
+      <td class={clsx("pr-6 py-4 text-right", visited && "text-gray-400")}>
         <span class="mr-5">
           {location != null && (
             <>
@@ -131,7 +131,7 @@ function StopList({ groups, setVisited }: ListProps) {
             return (
               <Fragment key={label}>
                 <tr class="text-lg leading-none">
-                  <td class="px-4 pb-3 pt-6 bg-white-50 flex flex-row items-center text-blue-600">
+                  <td class="px-6 pb-4 pt-7 bg-white-50 flex flex-row items-center text-blue-600">
                     <ArrowUpRight class="mr-1.5" />
                     <span>{label}</span>
                   </td>
@@ -153,8 +153,8 @@ function StopList({ groups, setVisited }: ListProps) {
 
 function Explainer() {
   return (
-    <div class="p-4 flex flex-col h-full justify-end">
-      <h1 class="text-6xl font-bold tracking-tight">OCL/MAP</h1>
+    <div class="p-6 flex flex-col h-full justify-end">
+      <h1 class="text-5xl font-bold tracking-tight">OCL/MAP</h1>
       <p class="mt-6">
         This app helps you find things in the Old College Law Library. To get started, enter a
         shelfmark below. You can add multiple shelfmarks to build up a list of locations, ordered
