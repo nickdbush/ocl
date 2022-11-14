@@ -69,7 +69,7 @@ export function App() {
         }}
       >
         <input
-          class="w-full px-6 py-4 border-t bg-white outline-none focus:border-blue-500 focus:bg-blue-50 transition-colors placeholder:text-gray-700 focus:placeholder:text-blue-600 focus:text-blue-900"
+          class="w-full px-4 py-4 border-t bg-white outline-none focus:border-blue-500 focus:bg-blue-50 transition-colors placeholder:text-gray-700 focus:placeholder:text-blue-600 focus:text-blue-900"
           type="text"
           placeholder="Shelfmark"
           value={input}
@@ -103,13 +103,11 @@ export function Stop({ destination, setVisited }: StopProps) {
     >
       <td class={clsx("pl-4 py-3", visited && "line-through text-gray-400")}>{shelfmark.text}</td>
       <td class={clsx("pr-4 py-3 text-right", visited && "text-gray-400")}>
-        <span class="mr-4">
-          {location != null && (
-            <>
-              {location.segment.bays[0]}-&gt;{location.segment.bays[1]}
-            </>
-          )}
-        </span>
+        {location != null && (
+          <span class="mr-3 text-gray-800">
+            {location.segment.bays[0]}-&gt;{location.segment.bays[1]}
+          </span>
+        )}
         <span class="font-bold">{location?.stack.id ?? "??"}</span>
       </td>
     </tr>
