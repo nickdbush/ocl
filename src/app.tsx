@@ -49,6 +49,37 @@ function useDestinations() {
     return { destinations: sortedDestinations, addShelfmark, setVisited };
 }
 
+type StopProps = {
+    destination: Destination;
+    setVisited: (shelfmark: Shelfmark, visited: boolean) => void;
+};
+
+export function Stop({ destination, setVisited }: StopProps) {
+    const { shelfmark, visited } = destination;
+    return (
+        <tr
+            class="cursor-pointer"
+            onClick={() => {
+                setVisited(shelfmark, !visited);
+            }}
+        >
+            <td
+                class={clsx(
+                    "px-4 py-3",
+                    visited && "line-through text-gray-400"
+                )}
+            >
+                {shelfmark.text}
+            </td>
+            <td
+                class={clsx("px-4 py-3 text-right", visited && "text-gray-400")}
+            >
+                {shelfmark.stack ?? "??"}
+            </td>
+        </tr>
+    );
+}
+
 export function App() {
     const [input, setInput] = useState("");
     const { destinations, addShelfmark, setVisited } = useDestinations();
@@ -71,42 +102,13 @@ export function App() {
                                                 <span>{floorText}</span>
                                             </td>
                                         </tr>
-                                        {destinations.map(
-                                            ({ shelfmark, visited }) => {
-                                                return (
-                                                    <tr
-                                                        key={shelfmark.text}
-                                                        class="cursor-pointer"
-                                                        onClick={() => {
-                                                            setVisited(
-                                                                shelfmark,
-                                                                !visited
-                                                            );
-                                                        }}
-                                                    >
-                                                        <td
-                                                            class={clsx(
-                                                                "px-4 py-3",
-                                                                visited &&
-                                                                    "line-through text-gray-400"
-                                                            )}
-                                                        >
-                                                            {shelfmark.text}
-                                                        </td>
-                                                        <td
-                                                            class={clsx(
-                                                                "px-4 py-3 text-right",
-                                                                visited &&
-                                                                    "text-gray-400"
-                                                            )}
-                                                        >
-                                                            {shelfmark.stack ??
-                                                                "??"}
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            }
-                                        )}
+                                        {destinations.map((destination) => (
+                                            <Stop
+                                                key={destination.shelfmark.text}
+                                                destination={destination}
+                                                setVisited={setVisited}
+                                            />
+                                        ))}
                                     </Fragment>
                                 );
                             })}
