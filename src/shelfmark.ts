@@ -98,7 +98,10 @@ function compareString(a: string, b: string): number {
 }
 
 function compareNumber(a: number, b: number): number {
-    return a - b;
+    const diff = a - b;
+    if (diff == 0) return 0;
+    if (diff < 0) return -1;
+    return 1;
 }
 
 export type StackId = `${number}${string}`;
