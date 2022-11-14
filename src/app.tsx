@@ -95,7 +95,7 @@ type StopProps = {
     setVisited: (visited: boolean) => void;
 };
 
-function Stop({ destination, setVisited }: StopProps) {
+export function Stop({ destination, setVisited }: StopProps) {
     const { shelfmark, visited } = destination;
     const location = shelfmark.location;
 
