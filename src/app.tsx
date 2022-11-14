@@ -69,7 +69,7 @@ export function App() {
         }}
       >
         <input
-          class="w-full px-4 py-4 border-t bg-white outline-none focus:border-blue-500 focus:bg-blue-50 transition-colors placeholder:text-gray-700 focus:placeholder:text-blue-600 focus:text-blue-900"
+          class="w-full px-4 py-4 border-t bg-white outline-none focus:border-blue-500 transition-colors placeholder:text-gray-700 placeholder:transition-colors focus:placeholder:text-blue-600 focus:text-blue-700"
           type="text"
           placeholder="Shelfmark"
           value={input}
@@ -101,11 +101,13 @@ export function Stop({ destination, setVisited }: StopProps) {
         setVisited(!visited);
       }}
     >
-      <td class={clsx("pl-4 py-3", visited && "line-through text-gray-400")}>{shelfmark.text}</td>
-      <td class={clsx("pr-4 py-3 text-right", visited && "text-gray-400")}>
+      <td class={clsx("pl-4 py-3 transition-colors", visited && "text-gray-400")}>
+        {shelfmark.text}
+      </td>
+      <td class={clsx("pr-4 py-3 text-right transition-colors", visited && "text-gray-400")}>
         {location != null && (
-          <span class="mr-3 text-gray-800">
-            {location.segment.bays[0]}-&gt;{location.segment.bays[1]}
+          <span class={clsx("mr-3 transition-colors", visited ? "text-gray-300" : "text-gray-700")}>
+            {location.segment.bays[0]}-{location.segment.bays[1]}
           </span>
         )}
         <span class="font-bold">{location?.stack.id ?? "??"}</span>
@@ -129,7 +131,7 @@ function StopList({ groups, setVisited }: ListProps) {
             return (
               <Fragment key={label}>
                 <tr class="text-lg leading-none">
-                  <td class="px-4 pb-3 pt-6 bg-white-50 flex flex-row items-center text-blue-600 text-lg">
+                  <td class="px-4 pb-3 pt-6 bg-white-50 flex flex-row items-center text-blue-600 text-xl">
                     <ArrowUpRight class="mr-2" />
                     <span>{label}</span>
                   </td>
