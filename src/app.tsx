@@ -107,7 +107,7 @@ export function Stop({ destination, setVisited }: StopProps) {
       <td class={clsx("pr-4 py-3 text-right transition-colors", visited && "text-gray-400")}>
         {location != null && (
           <span class={clsx("mr-3 transition-colors", visited ? "text-gray-300" : "text-gray-700")}>
-            {location.segment.bays[0]}-{location.segment.bays[1]}
+            {location.segment.bays[0]}&ndash;{location.segment.bays[1]}
           </span>
         )}
         <span class="font-bold">{location?.stack.id ?? "??"}</span>
