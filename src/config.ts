@@ -160,4 +160,13 @@ export const stacks: Stack[] = [
   { id: "6D", segments: [{ bays: [302, 306], marks: ["KJA2190 Sal.", "KJC1720 Nig."] }] },
   { id: "6E", segments: [{ bays: [307, 313], marks: ["KJC1720 Per.", "KJE2096 Eus."] }] },
   { id: "6F", segments: [{ bays: [314, 318], marks: ["KJE2096 Gar.", "KJE6456.A8 Lit."] }] },
+  { id: "7A", segments: [{ bays: [319, 322], marks: ["KJE6467 Bro.", "KJV388 Nib."] }] },
+  { id: "7B", segments: [{ bays: [323, 327], marks: ["KJV388 Nib.", "KJV3932.5 Fra."] }] },
+  {
+    id: "7C",
+    segments: [{ bays: [328, 332], marks: ["KJV3932.52003 Nou.", "KK985.51896.A6 Mun."] }],
+  },
+  { id: "7D", segments: [{ bays: [333, 337], marks: ["KK985.51896.A6 Pal.", "KK6242 Kot."] }] },
+  { id: "7E", segments: [{ bays: [338, 342], marks: ["KK6313 Ble.", "KKT494.31889.A6 Esp."] }] },
+  { id: "7F", segments: [{ bays: [343, 346], marks: ["KKT500 Alb.", "KMM702 She."] }] },
 ];
