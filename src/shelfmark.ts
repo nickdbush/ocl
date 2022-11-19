@@ -1,9 +1,15 @@
 import { stacks as stackConfig } from "./config";
 
-export type Location = {
-  segment: Segment;
-  stack: Stack;
-};
+export type Floor = "Basement" | "Ground" | "Mezzanine";
+
+export type Location =
+  | {
+      loc: "law";
+      stack: string;
+      bays: [number, number];
+      floor: Floor;
+    }
+  | { loc: "europa" };
 
 export class Shelfmark {
   #main: string;
@@ -42,27 +48,14 @@ export class Shelfmark {
     return this.class.startsWith("E");
   }
 
-  get floor(): number {
-    return this.compare(new Shelfmark("KDC453 Aaa.")) > 0 ? 1 : 0;
-  }
-
-  get floorText(): string {
-    if (this.floor == -1) {
-      return "Basement";
-    } else if (this.floor == 0) {
-      return "Ground";
-    } else if (this.floor == 1) {
-      return "Mezzanine";
-    }
-
-    throw new Error(`Unexpected floor number ${this.floor}`);
-  }
-
   get text(): string {
     return [this.#main, this.#suffix].join(" ");
   }
 
   get location(): Location | null {
+    if (this.isEuropa) {
+      return { loc: "europa" };
+    }
     return findStackForShelfmark(this);
   }
 
@@ -138,7 +131,8 @@ function findStackForShelfmark(shelfmark: Shelfmark): Location | null {
         // Shelfmark LT end
         shelfmark.compare(end) == -1
       ) {
-        return { stack, segment };
+        const floor: Floor = parseInt(stack.id.charAt(0)) < 5 ? "Ground" : "Mezzanine";
+        return { loc: "law", bays: segment.bays, stack: stack.id, floor };
       }
     }
   }

@@ -39,7 +39,12 @@ function useDestinations() {
   const sortedDestinations = Object.entries(
     groupBy(
       [...destinations].sort((a, b) => a.shelfmark.compare(b.shelfmark)),
-      (dest) => dest.shelfmark.floorText
+      (dest) => {
+        const location = dest.shelfmark.location;
+        if (!location) return "Unknown";
+        if (location.loc == "europa") return "Europa";
+        if (location.loc == "law") return location.floor;
+      }
     )
   ).map(([label, destinations]) => ({ label, destinations }));
 
@@ -105,12 +110,21 @@ export function Stop({ destination, setVisited }: StopProps) {
         {shelfmark.text}
       </td>
       <td class={clsx("pr-4 py-3 text-right transition-colors", visited && "text-gray-400")}>
-        {location != null && (
-          <span class={clsx("mr-3 transition-colors", visited ? "text-gray-300" : "text-gray-700")}>
-            {location.segment.bays[0]}&ndash;{location.segment.bays[1]}
-          </span>
+        {location?.loc == "law" && (
+          <>
+            <span
+              class={clsx("mr-3 transition-colors", visited ? "text-gray-300" : "text-gray-700")}
+            >
+              {location.bays[0]}&ndash;{location.bays[1]}
+            </span>
+            <span class="font-bold">{location.stack}</span>
+          </>
         )}
-        <span class="font-bold">{location?.stack.id ?? "??"}</span>
+        {location?.loc == "europa" && (
+          <>
+            <span>Helpdesk</span>
+          </>
+        )}
       </td>
     </tr>
   );
