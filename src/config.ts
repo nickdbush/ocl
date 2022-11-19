@@ -173,4 +173,35 @@ export const stacks: Stack[] = [
   { id: "8B", segments: [{ bays: [350, 352], marks: ["KNX68 Oda.", "KTL858 Chr."] }] },
   { id: "8C", segments: [{ bays: [353, 355], marks: ["KTL858 Con.", "KU1750 Ess."] }] },
   { id: "8D", segments: [{ bays: [356, 358], marks: ["KU1750 Faj.", "KZ213 Ver."] }] },
+
+  {
+    id: "9A",
+    segments: [
+      { bays: [359, 361], marks: ["KZ213 Ver.", "KZ1203.A2 Ann."] },
+      {
+        bays: [362, 364],
+        marks: ["KZ1203.A2 Ann.", "KZ1301 Aus."],
+      },
+    ],
+  },
+  {
+    id: "9B",
+    segments: [
+      { bays: [365, 366], marks: ["KZ1301 Cha.", "KZ3092 Pra."] },
+      { bays: [367, 369], marks: ["KZ3092 Pra.", "KZ3410 Bri."] },
+      { bays: [370, 375], marks: ["KZ3410 Bro.", "KZ6368 Gil."] },
+      { bays: [376, 377], marks: ["KZ6368 Int.", "KZ7145 Tra."] },
+      { bays: [378, 379], marks: ["KZ7155 Gal.", "PN5124.W58 You."] },
+    ],
+  },
+  {
+    id: "9C",
+    segments: [
+      { bays: [380, 381], marks: ["PN6071.P68 Con.", "SH328 Wor."] },
+      {
+        bays: [382, 383],
+        marks: ["TD5 Con.", "ZA5078.G7 Moo."],
+      },
+    ],
+  },
 ];
